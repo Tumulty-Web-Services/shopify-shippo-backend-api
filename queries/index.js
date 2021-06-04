@@ -23,6 +23,9 @@ query {
               title
               sku
               variantTitle
+              variant{
+                weight
+              }
             }
           }
         }
@@ -32,6 +35,4 @@ query {
 }
 `;
 
-module.exports = {
-  queryOrderName
-}
+module.exports = queryOrderName;

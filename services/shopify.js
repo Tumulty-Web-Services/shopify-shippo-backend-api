@@ -15,6 +15,4 @@ function queryShopify(query) {
         .then((data) => data)
         .catch((err) => err);
 }
-module.exports = {
-  queryShopify
-}
+module.exports = queryShopify;
