@@ -11,9 +11,6 @@ app.use(express.urlencoded({ extended: true }));
 
 app.post("/api/order-id", async (req, res) => {
   const id = req.body.id;
-  console.log(process.env.NODE_ENV);
-  console.log(process.env.SHOPIFY_STORE_URL);
-  console.log(process.env.SHOPIFY_PASS);
   const request = await queryShopify(queryOrderName(id));
   const results = request.data.orders.edges.map(({ node }) => {
     return {
