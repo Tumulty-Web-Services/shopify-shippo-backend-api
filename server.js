@@ -12,19 +12,35 @@ app.use(express.urlencoded({ extended: true }));
 app.post("/api/order-id", async (req, res) => {
   const id = req.body.id;
   const request = await queryShopify(queryOrderName(id));
-  const results = request.data.orders.edges.map(({ node }) => {
+  
+  const userInfo = request.data.orders.edges.map(({node}) => {
     return {
-      id: node.id,
-      name: node.name,
-      lineItems: node.lineItems,
-      sku: node.sku,
-    };
-  });
+      url: node.id,
+      id: node.name,
+      name: node.shippingAddress.name,
+      email: node.email,
+      phone: node.phone
+    }
+  })[0];
+
+  const shippingInfo = request.data.orders.edges.map(({ node}) => {
+    return node.shippingAddress
+  })[0];
+
+  const orders = request.data.orders.edges.map(({ node }) => node.lineItems.edges.map(({ node })=> ({
+        title: node.title,
+        sku: node.sku,
+        variantTitle: node.variantTitle
+      })),
+  )[0];  
 
   return res.json({
-    message: "This will return with shopify data based on an order some day :)",
     status: 200,
-    data: results,
+    data: {
+      userInfo,
+      shippingInfo,
+      orders
+    },
   });
 });
 app.listen(8080, () => {

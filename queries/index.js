@@ -7,8 +7,10 @@ query {
         id
         name     
         email
+        phone
         shippingAddress {
           id
+          name
           address1
           city
           country
@@ -18,20 +20,14 @@ query {
         lineItems(first: 250) {
           edges{
             node{
-              id
               title
               sku
               variantTitle
-            
-              variant{
-                id
-              }
             }
           }
         }
       }
     }
-
   }
 }
 `;
