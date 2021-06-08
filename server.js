@@ -5,6 +5,8 @@ const queryShopify = require("./services/shopify");
 const createAndSendLabel = require("./services/shippo");
 const queryOrderName = require("./queries/");
 
+const PORT = process.env.PORT || 8080;
+
 // middleware -- some drivers to help assist with the flow of data over our routes
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -61,7 +63,7 @@ app.post("/api/order-id", async (req, res) => {
  */
 app.get("/api/publish-label", async (req, res) => {
   try {
-    var addressFrom = {
+    const addressFrom = {
       name: "1600",
       street1: "215 Clayton St.",
       city: "San Francisco",
@@ -70,7 +72,7 @@ app.get("/api/publish-label", async (req, res) => {
       country: "US",
     };
 
-    var addressTo = {
+    const addressTo = {
       name: "Mr Hippo",
       street1: "Broadway 1",
       city: "New York",
@@ -79,7 +81,7 @@ app.get("/api/publish-label", async (req, res) => {
       country: "US",
     };
 
-    var parcel = {
+    const parcel = {
       length: "5",
       width: "5",
       height: "5",
@@ -101,6 +103,7 @@ app.get("/api/publish-label", async (req, res) => {
     });
   }
 });
-app.listen(8080, () => {
-  console.log("Server listening on port: 8080");
+
+app.listen(PORT, () => {
+  console.log(`Server listening on port: ${PORT}`);
 });
