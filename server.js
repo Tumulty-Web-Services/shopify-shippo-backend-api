@@ -104,6 +104,14 @@ app.get("/api/publish-label", async (req, res) => {
   }
 });
 
+/** Home screen route */
+app.route("/", (req, res) => {
+  return res.json({
+    status: 200,
+    message: "Working server"
+  })
+})
+
 app.listen(PORT, () => {
   console.log(`Server listening on port: ${PORT}`);
 });
