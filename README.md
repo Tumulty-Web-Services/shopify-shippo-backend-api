@@ -1,3 +1,1 @@
-The server needs completed - By EOD
-The integration with frontend needs completed - We'll begin integrating it this evening. @Kevin Rodríguez can you send us the repo link, so we can clone and work with it locally and start the integration. We want to be testing integrating the frontend and backend by tomorrow afternoon. Well start working on it Saturday morning.
-The Shippo integration needs done -  Were gonna start that this evening and finish as much as possible on Sunday. And on Monday I want to test it with real orders in Shopify.
+# Shippo-Shopify Server
