@@ -1,4 +1,4 @@
-require("dotenv").config({ path: `./.env.${process.env.NODE_ENV}` });
+require("dotenv").config();
 const express = require("express");
 const app = express();
 const queryShopify = require("./services/shopify");
@@ -105,7 +105,7 @@ app.get("/api/publish-label", async (req, res) => {
 });
 
 /** Home screen route */
-app.route("/", (req, res) => {
+app.get("/", (req, res) => {
   return res.json({
     status: 200,
     message: "Working server"
