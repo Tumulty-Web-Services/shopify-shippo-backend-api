@@ -2,10 +2,13 @@
   "name": "shopify-shippo-backend-api",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "dev": "NODE_ENV=dev nodemon server",
     "start": "NODE_ENV=prod node server"
+  },
+  "engines": {
+    "node": "14.x"
   },
   "keywords": [],
   "author": "",
