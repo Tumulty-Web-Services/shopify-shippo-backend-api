@@ -1,5 +1,6 @@
 require("dotenv").config();
 const express = require("express");
+const cors = require("cors");
 const app = express();
 const queryShopify = require("./services/shopify");
 const createAndSendLabel = require("./services/shippo");
@@ -7,9 +8,12 @@ const queryOrderName = require("./queries/");
 
 const PORT = process.env.PORT || 8080;
 
+
+
 // middleware -- some drivers to help assist with the flow of data over our routes
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
 /***
  * This endpoint gets the order details, and shipping information based on the id of the customer
@@ -61,8 +65,14 @@ app.post("/api/order-id", async (req, res) => {
 /***
  *  When the customer completes the process this endpoint will send the data from the database to shippo to create the label
  */
-app.get("/api/publish-label", async (req, res) => {
+app.post("/api/publish-label", async (req, res) => {
   try {
+    
+    const data = {
+      addressFrom : 'cubbie kits location',
+      addressTo: 'either address from shopify or the one the user manually enters'
+    };
+    
     const addressFrom = {
       name: "1600",
       street1: "215 Clayton St.",
