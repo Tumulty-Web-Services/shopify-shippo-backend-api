@@ -67,12 +67,9 @@ app.post("/api/order-id", async (req, res) => {
  */
 app.post("/api/publish-label", async (req, res) => {
   try {
+    const { address, name, order, email } = req.body.customer;
     
-    const data = {
-      addressFrom : 'cubbie kits location',
-      addressTo: 'either address from shopify or the one the user manually enters'
-    };
-    
+    // cubbie kit address
     const addressFrom = {
       name: "1600",
       street1: "215 Clayton St.",
@@ -83,29 +80,47 @@ app.post("/api/publish-label", async (req, res) => {
     };
 
     const addressTo = {
-      name: "Mr Hippo",
-      street1: "Broadway 1",
-      city: "New York",
-      state: "NY",
-      zip: "10007",
+      name,
+      street1: address.address,
+      city: address.city,
+      state: address.state,
+      zip: address.zip,
       country: "US",
+      email
     };
 
-    const parcel = {
-      length: "5",
-      width: "5",
-      height: "5",
-      distance_unit: "in",
-      weight: "2",
-      mass_unit: "lb",
-    };
-
-    const sendLabels = await createAndSendLabel(addressFrom, addressTo, parcel);
-
-    return res.json({
-      status: 200,
-      data: sendLabels,
-    });
+    if(order.length <= 4) {
+      const parcel = {
+        length: "12",
+        width: "8",
+        height: "2.5",
+        distance_unit: "in",
+        weight: "2",
+        mass_unit: "lb",
+      };
+  
+      const sendLabels = await createAndSendLabel(addressFrom, addressTo, parcel);
+      console.log(sendLabels);
+      return res.json({
+        status: 200,
+        data: sendLabels,
+      });
+    } else {
+      const parcel = {
+        length: "8",
+        width: "6",
+        height: "3.5",
+        distance_unit: "in",
+        weight: "2",
+        mass_unit: "lb",
+      };
+  
+      const sendLabels = await createAndSendLabel(addressFrom, addressTo, parcel);
+      return res.json({
+        status: 200,
+        data: sendLabels,
+      });
+    }
   } catch (err) {
     return res.json({
       status: 500,
