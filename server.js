@@ -100,7 +100,6 @@ app.post("/api/publish-label", async (req, res) => {
       };
   
       const sendLabels = await createAndSendLabel(addressFrom, addressTo, parcel);
-      console.log(sendLabels);
       return res.json({
         status: 200,
         data: sendLabels,
