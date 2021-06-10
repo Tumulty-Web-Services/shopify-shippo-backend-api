@@ -11,7 +11,9 @@ query {
         shippingAddress {
           id
           name
+          company
           address1
+          address2
           city
           country
           zip
