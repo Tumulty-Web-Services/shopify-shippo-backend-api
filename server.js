@@ -8,8 +8,6 @@ const queryOrderName = require("./queries/");
 
 const PORT = process.env.PORT || 8080;
 
-
-
 // middleware -- some drivers to help assist with the flow of data over our routes
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -68,14 +66,14 @@ app.post("/api/order-id", async (req, res) => {
 app.post("/api/publish-label", async (req, res) => {
   try {
     const { address, name, order, email } = req.body.customer;
-    
+
     // cubbie kit address
     const addressFrom = {
-      name: "1600",
-      street1: "215 Clayton St.",
-      city: "San Francisco",
-      state: "CA",
-      zip: "94117",
+      name: "Cubbiekit",
+      street1: "2517 HERNANDEZ ST.",
+      city: "Austin",
+      state: "TX",
+      zip: "78723",
       country: "US",
     };
 
@@ -86,10 +84,10 @@ app.post("/api/publish-label", async (req, res) => {
       state: address.state,
       zip: address.zip,
       country: "US",
-      email
+      email,
     };
 
-    if(order.length <= 4) {
+    if (order.length <= 4) {
       const parcel = {
         length: "12",
         width: "8",
@@ -98,8 +96,14 @@ app.post("/api/publish-label", async (req, res) => {
         weight: "2",
         mass_unit: "lb",
       };
-  
-      const sendLabels = await createAndSendLabel(addressFrom, addressTo, parcel);
+
+      const shipment = {
+        address_from: addressFrom,
+        address_to: addressTo,
+        parcels: [parcel],
+      };
+
+      const sendLabels = await createAndSendLabel(shipment);
       return res.json({
         status: 200,
         data: sendLabels,
@@ -113,8 +117,14 @@ app.post("/api/publish-label", async (req, res) => {
         weight: "2",
         mass_unit: "lb",
       };
-  
-      const sendLabels = await createAndSendLabel(addressFrom, addressTo, parcel);
+
+      const shipment = {
+        address_from: addressFrom,
+        address_to: addressTo,
+        parcels: [parcel],
+      };
+
+      const sendLabels = await createAndSendLabel(shipment);
       return res.json({
         status: 200,
         data: sendLabels,
@@ -132,8 +142,8 @@ app.post("/api/publish-label", async (req, res) => {
 app.get("/", (req, res) => {
   return res.json({
     status: 200,
-    message: "Working server"
-  })
+    message: "Working server",
+  });
 });
 
 app.listen(PORT, () => {
