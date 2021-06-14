@@ -31,7 +31,6 @@ async function createAndSendLabel(shipment) {
             console.error(err);
             return err;
           }
-          console.log(transaction);
 
           return transaction;
         }

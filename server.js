@@ -104,10 +104,8 @@ app.post("/api/publish-label", async (req, res) => {
       };
 
       const sendLabels = await createAndSendLabel(shipment);
-      return res.json({
-        status: 200,
-        data: sendLabels,
-      });
+
+      return res.json({ sendLabels });
     } else {
       const parcel = {
         length: "8",
@@ -125,10 +123,8 @@ app.post("/api/publish-label", async (req, res) => {
       };
 
       const sendLabels = await createAndSendLabel(shipment);
-      return res.json({
-        status: 200,
-        data: sendLabels,
-      });
+      
+      return res.json({ sendLabels });
     }
   } catch (err) {
     return res.json({
