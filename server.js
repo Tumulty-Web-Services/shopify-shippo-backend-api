@@ -65,7 +65,7 @@ app.post("/api/order-id", async (req, res) => {
  */
 app.post("/api/publish-label", async (req, res) => {
   try {
-    const { address, name, order, email } = req.body.customer;
+    const { address, name, order, email } = req.body;
 
     // cubbie kit address
     const addressFrom = {
@@ -100,7 +100,7 @@ app.post("/api/publish-label", async (req, res) => {
       const shipment = {
         address_from: addressFrom,
         address_to: addressTo,
-        parcels: [parcel],
+        parcels: parcel,
       };
 
       const sendLabels = await createAndSendLabel(shipment);
@@ -121,7 +121,7 @@ app.post("/api/publish-label", async (req, res) => {
       const shipment = {
         address_from: addressFrom,
         address_to: addressTo,
-        parcels: [parcel],
+        parcels: parcel,
       };
 
       const sendLabels = await createAndSendLabel(shipment);
