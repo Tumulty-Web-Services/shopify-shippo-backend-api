@@ -29,9 +29,9 @@ async function createAndSendLabel(shipment) {
         function (err, transaction) {
           if(err) {
             console.error(err);
-            console.log(transaction);
-            return transaction;
           }
+          console.log(transaction);
+          return transaction;
         }
       );     
     }
