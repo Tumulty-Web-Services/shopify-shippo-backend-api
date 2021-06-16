@@ -7,7 +7,9 @@ async function createAndSendLabel(shipment) {
     {
       address_from: address_from,
       address_to: address_to,
+      address_return: address_from,
       parcels: [parcels],
+      extra: {"is_return": true},
       async: false,
     },
     function (err, shipment) {
