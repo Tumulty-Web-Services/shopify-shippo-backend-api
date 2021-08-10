@@ -21,12 +21,16 @@ async function createAndSendLabel(shipment) {
       // Customize this based on your business logic.
       const rate = shipment.rates[0];
 
+      // https://goshippo.com/docs/reference#carriers
+
       // Purchase the desired rate.
       return shippo.transaction.create(
         {
           rate: rate.object_id,
           label_file_type: "PDF",
           async: false,
+          carrier_account: process.env.CARRIER_ACCOUNT_ID,
+          servicelevel_token: "usps"
         },
         function (err, transaction) {
           if(err) {
