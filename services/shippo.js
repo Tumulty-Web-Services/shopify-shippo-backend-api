@@ -20,6 +20,7 @@ async function createAndSendLabel(shipment) {
       // Get the first rate in the rates results.
       // Customize this based on your business logic.
       const rate = shipment.rates[0];
+      console.log(shipment);
 
       // Purchase the desired rate.
       return shippo.transaction.create(
