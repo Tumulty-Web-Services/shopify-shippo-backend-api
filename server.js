@@ -93,8 +93,8 @@ app.post("/api/publish-label", async (req, res) => {
         width: "8",
         height: "2.5",
         distance_unit: "in",
-        weight: "2",
-        mass_unit: "lb",
+        weight: "12",
+        mass_unit: "oz",
       };
 
       const shipment = {
@@ -105,15 +105,16 @@ app.post("/api/publish-label", async (req, res) => {
 
       const sendLabels = await createAndSendLabel(shipment);
 
+      /** The email function will go here...  */
       return res.json({ sendLabels });
     } else {
       const parcel = {
         length: "8",
         width: "6",
-        height: "3.5",
+        height: "2.5",
         distance_unit: "in",
-        weight: "2",
-        mass_unit: "lb",
+        weight: "6",
+        mass_unit: "oz",
       };
 
       const shipment = {
@@ -123,6 +124,14 @@ app.post("/api/publish-label", async (req, res) => {
       };
 
       const sendLabels = await createAndSendLabel(shipment);
+
+
+      /** And here...  */
+
+      /** 
+       *  1. If success send to email function createAndSendEmail
+       *  2. If error alert Salwa and tell her to review issue in Shippo
+       */
       
       return res.json({ sendLabels });
     }
