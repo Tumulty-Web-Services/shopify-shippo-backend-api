@@ -127,6 +127,11 @@ app.post("/api/publish-label", async (req, res) => {
 
 
       /** And here...  */
+
+      /** 
+       *  1. If success send to email function createAndSendEmail
+       *  2. If error alert Salwa and tell her to review issue in Shippo
+       */
       
       return res.json({ sendLabels });
     }
