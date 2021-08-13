@@ -100,7 +100,7 @@ app.post("/api/publish-label", async (req, res) => {
       const shipment = {
         address_from: addressFrom,
         address_to: addressTo,
-        parcels: [parcel],
+        parcels: parcel,
       };
 
       const sendLabels = await createAndSendLabel(shipment);
@@ -120,7 +120,7 @@ app.post("/api/publish-label", async (req, res) => {
       const shipment = {
         address_from: addressFrom,
         address_to: addressTo,
-        parcels: [parcel],
+        parcels: parcel,
       };
 
       const sendLabels = await createAndSendLabel(shipment);
