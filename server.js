@@ -65,50 +65,60 @@ app.post("/api/order-id", async (req, res) => {
  */
 app.post("/api/publish-label", async (req, res) => {
   try {
-    const { address, name, order, email } = req.body;
+    const { 
+      name,
+      company,
+      addressOne,
+      addressTwo,
+      city,
+      state,
+      phone,
+      zip,
+      email,
+      country 
+     } = req.body;
+
+
+    const addressTo = {
+      "name": name,
+      "company":company,
+      "street1":addressOne,
+      "street2": addressTwo,
+      "city":city,
+      "state":state,
+      "zip":zip,
+      "country":country,
+      "phone":phone,
+      "email":email,
+    };
+
 
     // cubbie kit address
     const addressFrom = {
-      name: "Cubbiekit",
-      street1: "2517 HERNANDEZ ST.",
-      city: "Austin",
-      state: "TX",
-      zip: "78723",
-      country: "US",
+      "name":process.env.CUBBIEKIT_NAME,
+      "company":process.env.CUBBIEKIT_COMPANY,
+      "street1":process.env.CUBBIEKIT_STREET,
+      "city":process.env.CUBBIEKIT_CITY,
+      "state":process.env.CUBBIEKIT_STATE,
+      "zip":process.env.CUBBIEKIT_ZIP,
+      "country": process.env.CUBBIEKIT_COUNTRY,
+      "phone":process.env.CUBBIEKIT_PHONE,
+      "email":process.env.CUBBIEKIT_EMAIL,
     };
 
-    const addressTo = {
-      name,
-      street1: address.address,
-      city: address.city,
-      state: address.state,
-      zip: address.zip,
-      country: "US",
-      email,
+
+    let parcel = 
+    {
+      length: "12",
+      width: "8",
+      height: "2.5",
+      distance_unit: "in",
+      weight: "12",
+      mass_unit: "oz",        
     };
 
-    if (order.length <= 4) {
-      const parcel = {
-        length: "12",
-        width: "8",
-        height: "2.5",
-        distance_unit: "in",
-        weight: "12",
-        mass_unit: "oz",
-      };
-
-      const shipment = {
-        address_from: addressFrom,
-        address_to: addressTo,
-        parcels: parcel,
-      };
-
-      const sendLabels = await createAndSendLabel(shipment);
-
-      /** The email function will go here...  */
-      return res.json({ sendLabels });
-    } else {
-      const parcel = {
+    if (order.length >= 4) {
+      parcel = {
         length: "8",
         width: "6",
         height: "2.5",
@@ -116,25 +126,20 @@ app.post("/api/publish-label", async (req, res) => {
         weight: "6",
         mass_unit: "oz",
       };
-
-      const shipment = {
-        address_from: addressFrom,
-        address_to: addressTo,
-        parcels: parcel,
-      };
-
-      const sendLabels = await createAndSendLabel(shipment);
-
-
-      /** And here...  */
-
-      /** 
-       *  1. If success send to email function createAndSendEmail
-       *  2. If error alert Salwa and tell her to review issue in Shippo
-       */
-      
-      return res.json({ sendLabels });
     }
+
+    const shipment = {
+      address_from: addressFrom,
+      address_to: addressTo,
+      parcels: parcel,
+    };
+    
+    /** refactor this to get only send back the label */
+    const sendLabels = await createAndSendLabel(shipment);
+
+    /** The email function will go here...  */
+    // return res.json({ sendLabels });
+
   } catch (err) {
     return res.json({
       status: 500,
@@ -144,7 +149,7 @@ app.post("/api/publish-label", async (req, res) => {
 });
 
 /** Home screen route */
-app.get("/", (req, res) => {
+app.get("/", (_, res) => {
   return res.json({
     status: 200,
     message: "Working server",
