@@ -138,7 +138,7 @@ app.post("/api/publish-label", async (req, res) => {
     const sendLabels = await createAndSendLabel(shipment);
 
     /** The email function will go here...  */
-    // return res.json({ sendLabels });
+    return res.json({ sendLabels });
 
   } catch (err) {
     return res.json({
