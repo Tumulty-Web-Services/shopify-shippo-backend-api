@@ -5,6 +5,7 @@ const app = express();
 const queryShopify = require("./services/shopify");
 const createAndSendLabel = require("./services/shippo");
 const queryOrderName = require("./queries/");
+const { response } = require("express");
 
 const PORT = process.env.PORT || 8080;
 
@@ -75,7 +76,8 @@ app.post("/api/publish-label", async (req, res) => {
       phone,
       zip,
       email,
-      country 
+      country,
+      order 
      } = req.body;
 
 
@@ -136,10 +138,11 @@ app.post("/api/publish-label", async (req, res) => {
     
     /** refactor this to get only send back the label */
     const sendLabels = await createAndSendLabel(shipment);
-    console.log(sendLabels);
     /** The email function will go here...  */
-    return res.json({ sendLabels });
-
+   return res.json({ 
+    shipment, 
+    sendLabels
+  });
   } catch (err) {
     return res.json({
       status: 500,
