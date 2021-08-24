@@ -109,26 +109,26 @@ app.post("/api/publish-label", async (req, res) => {
     };
 
 
-    let parcel = 
-    {
-      length: "12",
-      width: "8",
+    let parcel = {
+      length: "8",
+      width: "6",
       height: "2.5",
       distance_unit: "in",
-      weight: "12",
-      mass_unit: "oz",        
+      weight: "6",
+      mass_unit: "oz",
     };
-
+    
     if (order.length >= 4) {
       parcel = {
-        length: "8",
-        width: "6",
+        length: "12",
+        width: "8",
         height: "2.5",
         distance_unit: "in",
-        weight: "6",
+        weight: "12",
         mass_unit: "oz",
       };
     }
+    
 
     const shipment = {
       address_from: addressFrom,
