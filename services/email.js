@@ -373,7 +373,7 @@ async function createAndSendEmail(email, labelLink) {
                                     <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                                       <tbody>
                                         <tr>
-                                          <td> <a href="${labelLink}" >Download return label</a> </td>
+                                          <td> <a href="${labelLink}" download>Download return label</a> </td>
                                         </tr>
                                       </tbody>
                                     </table>
