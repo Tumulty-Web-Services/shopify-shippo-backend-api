@@ -104,18 +104,28 @@ async function createAndSendEmail(email, labelLink) {
     
           .footer {
             clear: both;
-            margin-top: 10px;
+            margin-top: 20px;
             text-align: center;
-            width: 100%; 
           }
-            .footer td,
-            .footer p,
-            .footer span,
+
+          .footer tr {
+            width:250px;
+            display: block;
+            margin:auto;
+          }
+
+          .footer td {
+            width: 55px;
+          }
+
+
             .footer a {
               color: #999999;
               font-size: 12px;
               text-align: center; 
           }
+
+
     
           /* -------------------------------------
               TYPOGRAPHY
@@ -192,8 +202,18 @@ async function createAndSendEmail(email, labelLink) {
               text-transform: capitalize; 
           }
     
-          .btn-primary table td {
-            background-color: #f1c862; 
+          #button-container {
+            margin-top: 42px;
+            margin-bottom: 42px;
+          }
+    
+          .btn-primary {
+            background-color: #f1c862;
+            text-align: center;
+            max-width: 300px;
+            margin: auto;
+            display: block;
+            margin-bottom: 20px;
           }
     
           .btn-primary a {
@@ -345,6 +365,43 @@ async function createAndSendEmail(email, labelLink) {
             } 
           }
     
+          #logo-container {
+            width: 100%;
+            border-bottom: 1px solid #121213;
+            margin-bottom: 20px;
+          }
+    
+          #logo {
+            display: block;
+            margin: 12px auto;
+          }
+    
+          .header-message {
+            color: #121213;
+            font-weight: normal;
+            font-size: 18px;
+          }
+    
+          .full p {
+            font-size: 16px;
+            line-height: 2;
+          }
+    
+          .full p strong {
+            font-size: 17px;
+          }
+    
+          #main-image-container {
+            width: 100%;
+            margin-bottom: 20px;
+          }
+    
+          #main-image {
+            display:block;
+            max-width: 100%:
+            margin: 0 auto;
+          }
+    
         </style>
       </head>
       <body class="">
@@ -364,25 +421,40 @@ async function createAndSendEmail(email, labelLink) {
                       <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                         <tr>
                           <td>
-                            <p>Hi there,</p>
-                            <p>Sometimes you just want to send a simple HTML email with a simple design and clear call to action. This is it.</p>
-                            <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
-                              <tbody>
-                                <tr>
-                                  <td align="left">
-                                    <table role="presentation" border="0" cellpadding="0" cellspacing="0">
-                                      <tbody>
-                                        <tr>
-                                          <td> <a href="${labelLink}" download>Download return label</a> </td>
-                                        </tr>
-                                      </tbody>
-                                    </table>
-                                  </td>
-                                </tr>
-                              </tbody>
-                            </table>
-                            <p>This is a really simple email template. Its sole purpose is to get the recipient to click the button with no distractions.</p>
-                            <p>Good luck! Hope it works.</p>
+                            <div id="logo-container">
+                              <img 
+                                src="https://res.cloudinary.com/tumulty-web-services/image/upload/v1630446939/cubbiekit/email/cubbiekit-logo.png"
+                                alt="cubbie kit"
+                                height="35"
+                                width="145"
+                                id="logo"  
+                              /> 
+                            </div>
+                            <p class="header-message">Thanks for closing the loop with us!</p>
+                            <div id="main-image-container">
+                              <img
+                                src="https://res.cloudinary.com/tumulty-web-services/image/upload/v1630446940/cubbiekit/email/cubbie-kit-message.png"
+                                alt="easy for you, soft for baby, good for the planet"
+                                width="1080"
+                                height="auto"
+                                id="main-image"
+                              />
+                            </div>
+                            <div class="full">
+                              <p>Your shipping label is ready to download. Click the button below to download and print your label.</p>
+                              <p>A few quick notes:</p>
+                              <p>1) Please don't send any other brand's merchandise to us! We hold our clothing to strict quality standards and our 100% GOTS organic cottom cannot be upcycled with unverfied yarns and dies.</p>
+                              <p>2) Please send clean clothes! Partner charities that we work with are often under resourced and cannot manage the additional laundry.</p>
+                              <p>As a thank you for supporting our mission, here is 5% off your nexto order: <strong>2BHE4NH7AEVR</strong></p>
+                            </div>
+                            <div id="button-container">
+                              <div class="btn btn-primary">
+                                <a href="https://www.cubbiekit.com/discount/2BHE4NH7AEVR" download>Claim your code</a>
+                              </div>
+                              <div class="btn btn-primary">
+                                <a href="${labelLink}" download>Download return label</a>
+                              </div>
+                            </div>
                           </td>
                         </tr>
                       </table>
@@ -391,7 +463,51 @@ async function createAndSendEmail(email, labelLink) {
     
                 <!-- END MAIN CONTENT AREA -->
                 </table>
-                <!-- END CENTERED WHITE CONTAINER -->          
+                <!-- END CENTERED WHITE CONTAINER -->
+                <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="footer">
+                    <tr>
+                     <td>
+                        <a href="https://www.facebook.com/cubbiekit" target="_blank" rel="noreferrer noopener">
+                          <img
+                            src="https://res.cloudinary.com/tumulty-web-services/image/upload/v1630449868/cubbiekit/email/Screen_Shot_2021-08-31_at_6.43.42_PM.png"
+                            alt="facebook"
+                            width="20"
+                            height="35"
+                          />
+                        </a>
+                     </td>
+                     <td>
+                      <a href="https://twitter.com/cubbiekit" target="_blank" rel="noreferrer noopener">
+                        <img
+                          src="https://res.cloudinary.com/tumulty-web-services/image/upload/v1630449867/cubbiekit/email/Screen_Shot_2021-08-31_at_6.42.54_PM.png"
+                          alt="twitter"
+                          width="37"
+                          height="35"
+                        />
+                      </a>
+                    </td>
+                     <td>
+                        <a href="https://www.instagram.com/cubbiekit/" target="_blank" rel="noreferrer noopener">
+                          <img
+                            src="https://res.cloudinary.com/tumulty-web-services/image/upload/v1630449868/cubbiekit/email/Screen_Shot_2021-08-31_at_6.42.59_PM.png"
+                            alt="instagram"
+                            width="36"
+                            height="35"
+                          />
+                        </a>
+                     </td>
+                     <td>
+                        <a href="https://www.pinterest.com/cubbiekit/" target="_blank" rel="noreferrer noopener">
+                            <img
+                              src="https://res.cloudinary.com/tumulty-web-services/image/upload/v1630449867/cubbiekit/email/Screen_Shot_2021-08-31_at_6.43.13_PM.png"
+                              alt="pinterest"
+                              width="41"
+                              height="35"
+                            />
+                        </a>
+                     </td>
+                    </tr>
+                </table>          
               </div>
             </td>
             <td>&nbsp;</td>
