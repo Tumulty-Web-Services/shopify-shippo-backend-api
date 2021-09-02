@@ -4,8 +4,8 @@ const cors = require("cors");
 const app = express();
 const queryShopify = require("./services/shopify");
 const createAndSendLabel = require("./services/shippo");
+const createAndSendEmail = require("./services/email");
 const queryOrderName = require("./queries/");
-const { response } = require("express");
 
 const PORT = process.env.PORT || 8080;
 
@@ -66,7 +66,7 @@ app.post("/api/order-id", async (req, res) => {
  */
 app.post("/api/publish-label", async (req, res) => {
   try {
-    const { 
+    const {
       name,
       company,
       addressOne,
@@ -77,35 +77,35 @@ app.post("/api/publish-label", async (req, res) => {
       zip,
       email,
       country,
-      order 
-     } = req.body;
+      order
+    } = req.body;
 
 
     const addressTo = {
       "name": name,
-      "company":company,
-      "street1":addressOne,
+      "company": company,
+      "street1": addressOne,
       "street2": addressTwo,
-      "city":city,
-      "state":state,
-      "zip":zip,
-      "country":country,
-      "phone":phone,
-      "email":email,
+      "city": city,
+      "state": state,
+      "zip": zip,
+      "country": country,
+      "phone": phone,
+      "email": email,
     };
 
 
     // cubbie kit address
     const addressFrom = {
-      "name":process.env.CUBBIEKIT_NAME,
-      "company":process.env.CUBBIEKIT_COMPANY,
-      "street1":process.env.CUBBIEKIT_STREET,
-      "city":process.env.CUBBIEKIT_CITY,
-      "state":process.env.CUBBIEKIT_STATE,
-      "zip":process.env.CUBBIEKIT_ZIP,
+      "name": process.env.CUBBIEKIT_NAME,
+      "company": process.env.CUBBIEKIT_COMPANY,
+      "street1": process.env.CUBBIEKIT_STREET,
+      "city": process.env.CUBBIEKIT_CITY,
+      "state": process.env.CUBBIEKIT_STATE,
+      "zip": process.env.CUBBIEKIT_ZIP,
       "country": process.env.CUBBIEKIT_COUNTRY,
-      "phone":process.env.CUBBIEKIT_PHONE,
-      "email":process.env.CUBBIEKIT_EMAIL,
+      "phone": process.env.CUBBIEKIT_PHONE,
+      "email": process.env.CUBBIEKIT_EMAIL,
     };
 
 
@@ -135,14 +135,14 @@ app.post("/api/publish-label", async (req, res) => {
       address_to: addressTo,
       parcels: parcel,
     };
-    
-    /** refactor this to get only send back the label */
+
+    /** Create a label from Shippo & and then send the label link to email generator function */
     const sendLabels = await createAndSendLabel(shipment);
-    /** The email function will go here...  */
-   return res.json({ 
-    shipment, 
-    sendLabels
-  });
+    const createEmail = await createAndSendEmail(email, sendLabels.label_url);
+
+    return res.json({
+      createEmail
+    });
   } catch (err) {
     return res.json({
       status: 500,
