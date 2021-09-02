@@ -9,7 +9,7 @@ const mg = mailgun.client({
 
 async function createAndSendEmail(email, labelLink) {
   const emailMsg = {
-    from: "CubbieKit Customer Support <hello@cubbiekit.com>",
+    from: "CubbieKit Customer Support <noreply@cubbiekit.com>",
     to: [ email ],
     subject: "Download your return shipping label now!",
     html: `
@@ -503,7 +503,13 @@ async function createAndSendEmail(email, labelLink) {
     `
   };
 
- const send = await mg.messages.create(process.env.MAILGUN_DOMAIN_SANDBOX, emailMsg)
+  let domain = process.env.MAILGUN_DOMAIN_SANDBOX;
+
+  if(process.env.APP_ENV === "production") {
+      domain = process.env.MAILGUN_DOMAIN_PRODUCTION;
+  }
+
+ const send = await mg.messages.create(domain, emailMsg)
   .then(msg => msg)
   .catch(err => err);
   
