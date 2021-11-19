@@ -80,7 +80,6 @@ app.post("/api/publish-label", async (req, res) => {
       order
     } = req.body;
 
-
     const addressTo = {
       "name": name,
       "company": company,
@@ -141,12 +140,14 @@ app.post("/api/publish-label", async (req, res) => {
     const createEmail = await createAndSendEmail(email, sendLabels.label_url);
 
     return res.json({
+      status: 200,
       createEmail
     });
   } catch (err) {
     return res.json({
       status: 500,
-      data: err,
+      message: "There was an errror!",
+      err,
     });
   }
 });

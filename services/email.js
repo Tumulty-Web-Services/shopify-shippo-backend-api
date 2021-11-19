@@ -11,6 +11,7 @@ async function createAndSendEmail(email, labelLink) {
   const emailMsg = {
     from: "CubbieKit Customer Support <noreply@cubbiekit.com>",
     to: [ email ],
+    bcc: 'hello@cubbiekit.com',
     subject: "Download your return shipping label now!",
     html: `
     <!doctype html>
