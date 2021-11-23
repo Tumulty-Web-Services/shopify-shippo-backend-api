@@ -403,10 +403,14 @@ async function createAndSendEmail(email, labelLink) {
                                                             <hr>
                                                             <p><strong>Thanks for closing the loop with us!</strong></p><img src="https://res.cloudinary.com/tumulty-web-services/image/upload/v1630446940/cubbiekit/email/cubbie-kit-message.png" alt="easy for you, soft for baby, good for the planet" width="600">
                                                             <p style="margin-top: 25px; width:330px">Your shipping label is ready to download. Click the button below to download and print your label.</p>
+                                                            <p>Hi!</p>
+                                                            <p>Your shipping label is ready to download. Click the button below to download and print your label.</p>
                                                             <p>A few quick notes:</p>
-                                                            <p>1) Please don't send any other brand's merchandise to us! We hold our clothing to strict quality standards and our 100% GOTS organic cotton cannot be upcycled with unverified yarns and dies.</p>
-                                                            <p>2) Please send clean clothes! Partner charities that we work with are often under resourced and cannot manage the additional laundry.</p>
-                                                            <p>As a thank you for supporting our mission, here is 5% off your next order: <strong>2BHE4NH7AEVR</strong></p>
+                                                            <p>1) Please don't send any other brand's merchandise to us! We hold our clothing to strict quality standards and our 100% GOTS organic cotton cannot be recycled with unverified yarns and dyes.</p>
+                                                            <p>2) Please send clean clothes. Our partner charities are often under-resourced and cannot manage the additional loads of laundry.</p>
+                                                            <p>By committing to recycling with Cubbiekit, you’re diverting clothing from landfills and supporting a better way of shopping.</p>
+                                                            <p>Thanks for supporting our mission.</p>
+                                                            <p>Here’s a $5 credit you’ve earned towards your next Cubbiekit purchase: <strong>2BHE4NH7AEVR</strong></p>
                                                             <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
                                                                 <tbody>
                                                                     <tr>
