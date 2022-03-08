@@ -401,7 +401,7 @@ async function createAndSendEmail(email, labelLink) {
                                                     <tr>
                                                         <td><a href="https://cubbiekit.com" target="_blank"><img src="https://res.cloudinary.com/tumulty-web-services/image/upload/v1630446939/cubbiekit/email/cubbiekit-logo.png" alt="cubbie kit" height="35" width="145" id="logo"></a>
                                                             <hr>
-                                                            <p><strong>Thanks for closing the loop with us!</strong></p><img src="https://res.cloudinary.com/tumulty-web-services/image/upload/v1630446940/cubbiekit/email/cubbie-kit-message.png" alt="easy for you, soft for baby, good for the planet" width="600">
+                                                            <p><strong>Thanks for recycling with us!</strong></p><img src="https://res.cloudinary.com/tumulty-web-services/image/upload/v1630446940/cubbiekit/email/cubbie-kit-message.png" alt="easy for you, soft for baby, good for the planet" width="600">
                                                             <p style="margin-top: 25px; width:330px">Your shipping label is ready to download. Click the button below to download and print your label.</p>
                                                             <p>Hi!</p>
                                                             <p>Your shipping label is ready to download. Click the button below to download and print your label.</p>
