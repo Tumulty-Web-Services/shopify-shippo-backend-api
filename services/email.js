@@ -406,7 +406,7 @@ async function createAndSendEmail(email, labelLink) {
                                                             <p>Hi!</p>
                                                             <p>Your shipping label is ready to download. Click the button below to download and print your label.</p>
                                                             <p>A few quick notes:</p>
-                                                            <p>1) Please don't send any other brand's merchandise to us! We hold our clothing to strict quality standards and our 100% GOTS organic cotton cannot be recycled with unverified yarns and dyes.</p>
+                                                            <p>1) Please don't send any other brand's merchandise to us! We hold our clothing to strict quality standards and our 100% GOTS organic cotton cannot be recycled with unverified yarns and dyes. </p>
                                                             <p>2) Please send clean clothes. Our partner charities are often under-resourced and cannot manage the additional loads of laundry.</p>
                                                             <p>By committing to recycling with Cubbiekit, you’re diverting clothing from landfills and supporting a better way of shopping.</p>
                                                             <p>Thanks for supporting our mission.</p>
