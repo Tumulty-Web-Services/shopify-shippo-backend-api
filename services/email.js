@@ -1,18 +1,19 @@
 const formData = require("form-data");
 const Mailgun = require("mailgun.js");
 const mailgun = new Mailgun(formData);
-const mg = mailgun.client({ 
-  username: "api",
-  key: process.env.MAILGUN_API_KEY,
-  public_key: process.env.MAILGUN_PUBLIC_KEY
+const mg = mailgun.client({
+    username: "api",
+    key: process.env.MAILGUN_API_KEY,
+    public_key: process.env.MAILGUN_PUBLIC_KEY
 });
 
 async function createAndSendEmail(email, labelLink) {
-  const emailMsg = {
-    from: "Cubbiekit Customer Support <hello@cubbiekit.com>",
-    to: [ email ],
-    subject: "Download your return shipping label now!",
-    html: `
+    const emailMsg = {
+        from: "Cubbiekit <noreply@cubbiekit.com>",
+        to: [email],
+        bcc: 'hello@cubbiekit.com',
+        subject: "Download your return shipping label now!",
+        html: `
     <!doctype html>
     <html>
     <link type="text/css" rel="stylesheet" id="dark-mode-custom-link">
@@ -402,10 +403,14 @@ async function createAndSendEmail(email, labelLink) {
                                                             <hr>
                                                             <p><strong>Thanks for recycling with us!</strong></p><img src="https://res.cloudinary.com/tumulty-web-services/image/upload/v1630446940/cubbiekit/email/cubbie-kit-message.png" alt="easy for you, soft for baby, good for the planet" width="600">
                                                             <p style="margin-top: 25px; width:330px">Your shipping label is ready to download. Click the button below to download and print your label.</p>
+                                                            <p>Hi!</p>
+                                                            <p>Your shipping label is ready to download. Click the button below to download and print your label.</p>
                                                             <p>A few quick notes:</p>
-                                                            <p>1) Please don't send any other brand's merchandise to us! We hold our clothing to strict quality standards and our 100% GOTS organic cotton cannot be upcycled with unverified yarns and dyes.</p>
-                                                            <p>2) Please send clean clothes! Partner charities that we work with are often under resourced and cannot manage the additional laundry.</p>
-                                                            <p>As a thank you for supporting our mission, here is 5% off your next order: <strong>2BHE4NH7AEVR</strong></p>
+                                                            <p>1) Please don't send any other brand's merchandise to us! We hold our clothing to strict quality standards and our 100% GOTS organic cotton cannot be recycled with unverified yarns and dyes. </p>
+                                                            <p>2) Please send clean clothes. Our partner charities are often under-resourced and cannot manage the additional loads of laundry.</p>
+                                                            <p>By committing to recycling with Cubbiekit, you’re diverting clothing from landfills and supporting a better way of shopping.</p>
+                                                            <p>Thanks for supporting our mission.</p>
+                                                            <p>Here’s a $5 credit you’ve earned towards your next Cubbiekit purchase: <strong>2BHE4NH7AEVR</strong></p>
                                                             <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
                                                                 <tbody>
                                                                     <tr>
@@ -501,13 +506,19 @@ async function createAndSendEmail(email, labelLink) {
     
     </html>
     `
-  };
+    };
 
- const send = await mg.messages.create(process.env.MAILGUN_DOMAIN_SANDBOX, emailMsg)
-  .then(msg => msg)
-  .catch(err => err);
-  
-  return send;
+    let domain = process.env.MAILGUN_DOMAIN_SANDBOX;
+
+    if (process.env.APP_ENV === "production") {
+        domain = process.env.MAILGUN_DOMAIN_PRODUCTION;
+    }
+
+    const send = await mg.messages.create(domain, emailMsg)
+        .then(msg => msg)
+        .catch(err => err);
+
+    return send;
 }
 
 module.exports = createAndSendEmail;

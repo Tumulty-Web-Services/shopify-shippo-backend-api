@@ -20,7 +20,7 @@ async function createAndSendLabel(shipment) {
     "async": false
   }, function (err, transaction) {
     if (err) {
-      console.error(err)
+      console.error(new Error(err))
     }
 
     return transaction
