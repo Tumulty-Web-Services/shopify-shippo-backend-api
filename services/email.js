@@ -1,19 +1,19 @@
 const formData = require("form-data");
 const Mailgun = require("mailgun.js");
 const mailgun = new Mailgun(formData);
-const mg = mailgun.client({ 
-  username: "api",
-  key: process.env.MAILGUN_API_KEY,
-  public_key: process.env.MAILGUN_PUBLIC_KEY
+const mg = mailgun.client({
+    username: "api",
+    key: process.env.MAILGUN_API_KEY,
+    public_key: process.env.MAILGUN_PUBLIC_KEY
 });
 
 async function createAndSendEmail(email, labelLink) {
-  const emailMsg = {
-    from: "Cubbiekit Customer Support <noreply@cubbiekit.com>",
-    to: [ email ],
-    bcc: 'hello@cubbiekit.com',
-    subject: "Download your return shipping label now!",
-    html: `
+    const emailMsg = {
+        from: "Cubbiekit <noreply@cubbiekit.com>",
+        to: [email],
+        bcc: 'hello@cubbiekit.com',
+        subject: "Download your return shipping label now!",
+        html: `
     <!doctype html>
     <html>
     <link type="text/css" rel="stylesheet" id="dark-mode-custom-link">
@@ -506,19 +506,19 @@ async function createAndSendEmail(email, labelLink) {
     
     </html>
     `
-  };
+    };
 
-  let domain = process.env.MAILGUN_DOMAIN_SANDBOX;
+    let domain = process.env.MAILGUN_DOMAIN_SANDBOX;
 
-  if(process.env.APP_ENV === "production") {
-      domain = process.env.MAILGUN_DOMAIN_PRODUCTION;
-  }
+    if (process.env.APP_ENV === "production") {
+        domain = process.env.MAILGUN_DOMAIN_PRODUCTION;
+    }
 
- const send = await mg.messages.create(domain, emailMsg)
-  .then(msg => msg)
-  .catch(err => err);
-  
-  return send;
+    const send = await mg.messages.create(domain, emailMsg)
+        .then(msg => msg)
+        .catch(err => err);
+
+    return send;
 }
 
 module.exports = createAndSendEmail;
